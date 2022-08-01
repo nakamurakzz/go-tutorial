@@ -186,6 +186,37 @@ func main() {
 
 	site2 := Site{siteName: "golang", url: "https://golang.org/"}
 	fmt.Println(site2)
+
+	// 配列
+	var names [2]string
+	names[0] = "alice"
+	names[1] = "bob"
+	fmt.Println(names)
+	// names[2] = "carol" // エラー
+
+	// スライス
+	var names2 []string
+	names2 = names[1:2]
+
+	fmt.Println(names2)
+
+	// スライスのリテラル
+	names3 := []string{"alice", "bob", "carol"}
+	names3 = append(names3, "dave")
+	fmt.Println(names3)
+
+	fmt.Println(len(names3))
+	fmt.Println(cap(names3))
+
+	var ns []int
+	fmt.Println(ns, len(ns), cap(ns))
+	if ns == nil {
+		fmt.Println("nil")
+	}
+
+	if len(ns) == 0 {
+		fmt.Println("nil")
+	}
 }
 
 func show(y *string) {
