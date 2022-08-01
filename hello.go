@@ -103,16 +103,95 @@ func main() {
 	// deferはスタックに積まれていく
 	// deferは、関数が終了するときに実行される
 	// defer3 -> defer2 -> defer の順にコンソール出力される
-	defer fmt.Println("defer")
-	defer fmt.Println("defer2")
-	defer fmt.Println("defer3")
+	// defer fmt.Println("defer")
+	// defer fmt.Println("defer2")
+	// defer fmt.Println("defer3")
 
 	nn := 1
-	defer fmt.Println(nn) // 処理が遅れるだけなので 1 が出力される
+	// defer fmt.Println(nn) // 処理が遅れるだけなので 1 が出力される
 	nn = 2
 	fmt.Println(nn) 
 
 	fmt.Println("main")
+
+
+	// *int: 整数型のポインタ
+	// ポインタ変数：メモリ上に保存されている値のアドレスを保持する変数
+	var p *int
+	i := 42
+	// &i: 整数型のポインタ
+	p = &i
+	fmt.Println(*p)
+	fmt.Println(p)
+
+	// pointer
+	xxx := 100
+	fmt.Println("x address:\t", &xxx) // -> xxx変数のアドレス
+	var yyy *int
+	fmt.Println("y value:\t", yyy) // -> yyy変数には値が入っていないためnil
+	fmt.Println("y address:\t", &yyy) // -> yyy変数のアドレス
+	yyy = &xxx // yyy変数にxxx変数のアドレスを代入
+	fmt.Println("y value:\t", yyy) // -> yyy変数にはxxx変数のアドレスが入っているため、xxx変数のアドレスが出力される
+	fmt.Println("y address:\t", &yyy) // -> yyy変数のアドレス
+
+	var z **int
+	fmt.Println("z value:\t", z) // -> z変数には値が入っていないためnil
+	fmt.Println("z address:\t", &z) // -> z変数のアドレス
+	z = &yyy // z変数にyyy変数のアドレスを代入
+	fmt.Println("z value:\t", z) // -> z変数にはyyy変数のアドレスが入っているため、yyy変数のアドレスが出力される
+	fmt.Println("z address:\t", &z) // -> z変数のアドレス
+
+	// &変数名: 変数が確保しているアドレス
+	// *変数名： ポインタ変数の指すアドレスの実データ
+	// *型名: 指定した型を保持するために確保したアドレス => ポインタ変数
+
+	// Goはすべて値渡し
+	// 参照渡ししたい時は、&変数名を渡す
+
+	var xxxx = "alice"
+	fmt.Println(&xxxx) // xxxx のアドレスを出力
+	yyyy := &xxxx
+	fmt.Println(*yyyy) // xxxx の値を出力
+	fmt.Println(yyyy) // xxxx のアドレスを出力
+	fmt.Println(&yyyy) // yyyy のアドレスを出力
+	show(yyyy)
+
+
+	// 構造体
+	type Person struct {
+		name string
+		age int
+	}
+	fmt.Println(Person{"alice", 20})
+	person := Person{"alice", 20}
+	fmt.Println(person.name)
+	personPointer := &person
+	personPointer.name = "bob"
+	fmt.Println(*personPointer)
+	fmt.Println(person)
+
+	personPassValue := person
+	personPassValue.name = "bob2"
+	fmt.Println(person)
+	fmt.Println(personPassValue)
+
+	type Site struct {
+		siteName, url string
+		from int
+	}
+
+	// 初期値を指定しない場合はnil相当の値が入る
+	site := Site{}
+	fmt.Println(site)
+
+	site2 := Site{siteName: "golang", url: "https://golang.org/"}
+	fmt.Println(site2)
+}
+
+func show(y *string) {
+	fmt.Println("val:", *y)
+	fmt.Println("address:", &y)
+	fmt.Println("address:", y)
 }
 
 
