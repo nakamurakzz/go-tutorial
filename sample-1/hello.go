@@ -217,6 +217,48 @@ func main() {
 	if len(ns) == 0 {
 		fmt.Println("nil")
 	}
+
+	var pow = []int{1,2,4,6,18,32,64,128}
+	// range
+	// array.forEach((v,i)=>console.log(i,v))
+	for i, v:= range pow {
+		fmt.Println(i,v)
+	}
+
+	// map
+	var m map[string]Vertex
+	m = make(map[string]Vertex) // 指定され型のmapを初期化
+	fmt.Println(m)
+	m["Bell Labs"] = Vertex{
+		40.68433, -74.39967,
+	}
+	fmt.Println(m["Bell Labs"])
+
+	ver := Vertex{40.68433, -74.39967}
+	fmt.Println(ver)
+
+	mm := map[string]Vertex{
+		"Bell Labs": {40.68433, -74.39967},
+		"Google": {37.42202, -122.08408},
+	}
+	fmt.Println(mm)
+	delete(mm, "Google")
+	fmt.Println(mm)
+
+	elm, ok := mm["Google"]
+	fmt.Println(elm, ok)
+	elm1, ok1 := mm["Bell Labs"]
+	fmt.Println(elm1, ok1)
+
+	// mapはstructとkeyを紐付けて管理
+	// map
+	// {
+	//    key: Vertex
+	// }[]
+}
+
+type Vertex struct {
+	Lat, Long float64
 }
 
 func show(y *string) {
